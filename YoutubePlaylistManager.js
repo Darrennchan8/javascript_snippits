@@ -23,11 +23,11 @@
             i++;
             video_collection[i].setAttribute("killList", i % simultaneous_operations);
         }
-        confirmDeletion(i+1);
+        confirmDeletion(i + 1);
     };
     var delFirst = function(thread) {
         console.warn("Deleting Next Video in playlist, group " + thread);
-        var killList = document.querySelectorAll("[killList = '"+thread+"']");
+        var killList = document.querySelectorAll("[killList = '" + thread + "']");
         for (let i = 0, ii = killList.length; i != ii; i++) {
             if (!killList[i].classList.contains("handled_deletion")) {
                 killList[i].querySelector(".pl-video-edit-remove").click();
@@ -39,7 +39,7 @@
     var confirmDeletion = function(vids_to_delete) {
         var confirm = document.createElement("div");
         confirm.style = "position:fixed;background-color:yellow;bottom:0;width:100%;z-index:2147483647;";
-        confirm.innerHTML = '<p style="margin:10px;cursor:default">'+vids_to_delete+' Videos will be removed.</p';
+        confirm.innerHTML = '<p style="margin:10px;cursor:default">' + vids_to_delete + ' Videos will be removed.</p';
         var button = document.createElement("button");
         button.style.margin = "10px";
         button.style.cursor = "pointer";
@@ -51,10 +51,10 @@
             startDeletion();
         }.bind(this));
     };
-    var updated_kill_list, cached_kill_list = []; 
+    var updated_kill_list, cached_kill_list = [];
     var startDeletion = function() {
         updated_kill_list = function(group) {
-            return document.querySelectorAll("[killList = '"+group+"']");
+            return document.querySelectorAll("[killList = '" + group + "']");
         };
         for (let i = 0; i <= simultaneous_operations; i++) {
             cached_kill_list[i] = document.querySelectorAll("[killList = '"+i+"']");
@@ -73,7 +73,7 @@
             setTimeout(checkDeletion.bind(this, thread), 100);
         }
     };
-    if (location.href.indexOf("youtube.com/playlist?") == -1) {
+    if (location.href.indexOf("youtube.com/playlist?") === -1) {
         window.open("https://www.youtube.com/playlist?list=WL");
     } else {
         loadAll();
